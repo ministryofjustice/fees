@@ -4,5 +4,6 @@ class GeneralApplicationsController < ApplicationController
   end
 
   def show
+    @general_application = GeneralApplication.friendly.find(params[:id])
   end
 end
