@@ -10,11 +10,9 @@ RSpec.describe GeneralApplicationsController, :type => :controller do
   end
 
   describe '#show' do
-    before do
-      GeneralApplication.new(title: 'application1', fee: '1')
-    end
+    before { GeneralApplication.create!(title: 'application1', fee: '1') }
 
-    it 'should render the show view' do
+    it 'should render the JSON show view' do
       get :show, format: :json, id: 'application1'
       expect(response.status).to eq(200)
     end
