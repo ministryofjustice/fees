@@ -44,3 +44,5 @@ group :development, :test do
 
   gem 'rspec-rails'
 end
+
+gem 'friendly_id', '~> 5.1.0'
