@@ -47,4 +47,16 @@ RSpec.describe GeneralApplication, :type => :model do
       expect(last_entry).to eq friendly
     end
   end
+
+  describe 'slug modification' do
+    let(:application) do
+      application = GeneralApplication.create!(title: 'foo', fee: '1')
+      application.update(title: 'foo bar')
+      application
+    end
+
+    it 'should change the slug to match the new title' do
+      expect(application.slug).to match 'foo-bar'
+    end
+  end
 end

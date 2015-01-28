@@ -4,4 +4,8 @@ class GeneralApplication < ActiveRecord::Base
 
   validates :title, presence: true
   validates :fee, presence: true
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 end
