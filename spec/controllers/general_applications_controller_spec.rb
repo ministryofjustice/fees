@@ -16,6 +16,11 @@ RSpec.describe GeneralApplicationsController, :type => :controller do
       get :show, format: :json, id: 'application1'
       expect(response.status).to eq(200)
     end
+
+    it 'should render the HTML show view' do
+      get :show, format: :html, id: 'application1'
+      expect(response.status).to eq(200)
+    end
   end
 
 end
