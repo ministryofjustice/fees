@@ -1,6 +1,6 @@
 class GeneralApplication < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: [:slugged, :history]
 
   validates :title, presence: true
   validates :fee, presence: true

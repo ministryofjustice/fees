@@ -59,4 +59,17 @@ RSpec.describe GeneralApplication, :type => :model do
       expect(application.slug).to match 'foo-bar'
     end
   end
+
+  describe 'history' do
+    before do
+      GeneralApplication.create!(title: 'foo', fee: '1')
+      GeneralApplication.friendly.find('foo').update(title: 'foo bar baz')
+    end
+
+    it 'should point to the same model after title change' do
+      expect {
+        GeneralApplication.friendly.find('foo')
+      }.not_to raise_error
+    end
+  end
 end
