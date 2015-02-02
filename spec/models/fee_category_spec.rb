@@ -16,4 +16,15 @@ RSpec.describe FeeCategory, :type => :model do
       end
     end
   end
+
+  describe 'slug generation' do
+    before { FeeCategory.create!(title: 'general') }
+
+    let(:fee) { FeeCategory.where(title: 'general').first }
+    let(:friendly_fee) { FeeCategory.friendly.find('general') }
+
+    it 'should find the general application based on the slug id' do
+      expect(fee).to eq friendly_fee
+    end
+  end
 end
