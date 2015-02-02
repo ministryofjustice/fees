@@ -1,0 +1,9 @@
+<h1>
+  Fee categories
+</h1>
+
+<%= @categories.each do |category| %>
+  <ul>
+   <li> <%= link_to category.title, category.friendly_id %> </li>
+  </ul>
+<% end %>
