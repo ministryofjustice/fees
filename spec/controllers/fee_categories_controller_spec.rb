@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FeeCategoriesController, :type => :controller do
   render_views
 
-  describe "#index" do
+  describe "GET index" do
     it "should render the list of fee categories in HTML" do
       get :index, format: :html
       expect(response.status).to eq(200)
