@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202111642) do
+ActiveRecord::Schema.define(version: 20150204125628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20150202111642) do
   end
 
   add_index "fee_categories", ["slug"], name: "index_fee_categories_on_slug", unique: true, using: :btree
+
+  create_table "fee_types", force: :cascade do |t|
+    t.integer  "fee_category_id", null: false
+    t.string   "title"
+    t.integer  "amount"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "fee_types", ["fee_category_id"], name: "index_fee_types_on_fee_category_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -48,4 +58,5 @@ ActiveRecord::Schema.define(version: 20150202111642) do
 
   add_index "general_applications", ["slug"], name: "index_general_applications_on_slug", unique: true, using: :btree
 
+  add_foreign_key "fee_types", "fee_categories"
 end
