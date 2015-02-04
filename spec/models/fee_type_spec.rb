@@ -16,4 +16,10 @@ RSpec.describe FeeType, :type => :model do
       end
     end
   end
+
+  context "create nested fees under FeeCategory" do
+    it 'should work' do
+      expect(FeeType.reflect_on_association(:fee_category).macro).to eq(:belongs_to)
+    end
+  end
 end
