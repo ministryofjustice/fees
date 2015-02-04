@@ -26,6 +26,20 @@ RSpec.describe FeeCategoriesController, :type => :controller do
         get :index, format: :html
         expect(response.body).to match /(General\ Applications|Money\ Claims)/im
       end
+
+      context "JSON" do
+        let(:json) do
+          [
+            { "title" => "General Applications", "link" => "general-applications" },
+            { "title" => "Money Claims", "link" => "money-claims" }
+          ].to_json
+        end
+
+        it "should list fee categories in JSON" do
+          get :index, format: :json
+          expect(response.body).to match json
+        end
+      end
     end
   end
 end
