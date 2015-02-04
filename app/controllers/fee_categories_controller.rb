@@ -4,5 +4,6 @@ class FeeCategoriesController < ApplicationController
   end
 
   def show
+    @category = FeeCategory.friendly.find(params[:id])
   end
 end

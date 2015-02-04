@@ -49,9 +49,16 @@ RSpec.describe FeeCategoriesController, :type => :controller do
   describe "GET show" do
     let(:fee) { FeeCategory.create!(title: 'General Applications') }
 
-    it "should render a fee category in HTML" do
-      get :show, id: fee.friendly_id, format: :html
-      expect(response.status).to eq(200)
+    context "HTML" do
+      it "should render a fee category in HTML" do
+        get :show, id: fee.friendly_id, format: :html
+        expect(response.status).to eq(200)
+      end
+
+      it "should show the fee" do
+        get :show, id: fee.friendly_id, format: :html
+        expect(response.body).to match 'General Applications'
+      end
     end
 
     it "should render a fee category in JSON" do
