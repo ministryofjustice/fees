@@ -22,9 +22,11 @@ RSpec.describe FeeCategoriesController, :type => :controller do
         end
       end
 
-      it "should list fee categories in HTML" do
-        get :index, format: :html
-        expect(response.body).to match /(General\ Applications|Money\ Claims)/im
+      context "HTML" do
+        it "should list fee categories in HTML" do
+          get :index, format: :html
+          expect(response.body).to match /(General\ Applications|Money\ Claims)/im
+        end
       end
 
       context "JSON" do
