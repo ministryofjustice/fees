@@ -27,4 +27,16 @@ RSpec.describe FeeCategory, :type => :model do
       expect(fee).to eq friendly_fee
     end
   end
+
+  describe 'slug re-generation' do
+    let(:category) do
+      category = FeeCategory.create!(title: 'foo')
+      category.update(title: 'foo bar')
+      category
+    end
+
+    it 'should change the slug to match the new title' do
+      expect(category.slug).to match 'foo-bar'
+    end
+  end
 end
