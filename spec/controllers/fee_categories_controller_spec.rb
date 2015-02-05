@@ -47,23 +47,45 @@ RSpec.describe FeeCategoriesController, :type => :controller do
   end
 
   describe "GET show" do
-    let(:fee) { FeeCategory.create!(title: 'General Applications') }
+    let(:category) { FeeCategory.create!(title: 'General Applications') }
+    let!(:fee) do
+      FeeType.create!(fee_category_id: category.id,
+                      title: 'yes yes',
+                      amount: 10)
+    end
 
     context "HTML" do
       it "should render a fee category in HTML" do
-        get :show, id: fee.friendly_id, format: :html
+        get :show, id: category.friendly_id, format: :html
         expect(response.status).to eq(200)
       end
 
-      it "should show the fee" do
-        get :show, id: fee.friendly_id, format: :html
+      it "should show the fee category" do
+        get :show, id: category.friendly_id, format: :html
         expect(response.body).to match 'General Applications'
+      end
+
+      it "should show the fee types under the category" do
+        get :show, id: category.friendly_id, format: :html
+        expect(response.body).to match 'yes yes'
       end
     end
 
-    it "should render a fee category in JSON" do
-      get :show, id: fee.friendly_id, format: :json
-      expect(response.status).to eq(200)
+    context "JSON" do
+      it "should render a fee category in JSON" do
+        get :show, id: category.friendly_id, format: :json
+        expect(response.status).to eq(200)
+      end
+
+      it "should show the fee category" do
+        get :show, id: category.friendly_id, format: :json
+        expect(response.body).to match 'General Applications'
+      end
+
+      it "should show the fee types under the category" do
+        get :show, id: category.friendly_id, format: :json
+        expect(response.body).to match 'yes yes'
+      end
     end
   end
 end
