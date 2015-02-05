@@ -22,4 +22,17 @@ RSpec.describe FeeType, :type => :model do
       expect(FeeType.reflect_on_association(:fee_category).macro).to eq(:belongs_to)
     end
   end
+
+  describe 'slug re-generation' do
+    let(:fee) do
+      category = FeeCategory.create!(title: 'foo')
+      fee = FeeType.create!(title: 'foo', amount: 10, fee_category_id: category.id)
+      fee.update(title: 'foo bar')
+      fee
+    end
+
+    it 'should change the slug to match the new title' do
+      expect(fee.slug).to match 'foo-bar'
+    end
+  end
 end
