@@ -22,6 +22,18 @@ RSpec.describe FeeTypesController, :type => :controller do
         expect(response.body).to match 'yes yes'
       end
     end
+
+    context "JSON" do
+      it "returns http success" do
+        get :show, id: fee.friendly_id, format: :json
+        expect(response).to have_http_status(:success)
+      end
+
+      it "shows the fee" do
+        get :show, id: fee.friendly_id, format: :json
+        expect(response.body).to match 'yes yes'
+      end
+    end
   end
 
 end
