@@ -11,5 +11,10 @@ ActiveAdmin.register FeeCategory do
     actions
   end
 
+  form do |f|
+    f.input :title
+    actions
+  end
+
   permit_params :title
 end
