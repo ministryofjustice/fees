@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'fee/:id', to: 'fee_types#show', as: 'fee'
+
   devise_for :users, ActiveAdmin::Devise.config
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
