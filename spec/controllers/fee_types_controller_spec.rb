@@ -11,14 +11,16 @@ RSpec.describe FeeTypesController, :type => :controller do
                       amount: 10)
     end
 
-    it "returns http success" do
-      get :show, id: fee.friendly_id, format: :html
-      expect(response).to have_http_status(:success)
-    end
+    context "HTML" do
+      it "returns http success" do
+        get :show, id: fee.friendly_id, format: :html
+        expect(response).to have_http_status(:success)
+      end
 
-    it "shows the fee" do
-      get :show, id: fee.friendly_id, format: :html
-      expect(response.body).to match 'yes yes'
+      it "shows the fee" do
+        get :show, id: fee.friendly_id, format: :html
+        expect(response.body).to match 'yes yes'
+      end
     end
   end
 
