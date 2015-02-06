@@ -6,7 +6,7 @@
 <ul>
 <% @category.fee_types.each do |fee| %>
   <li>
-    <%= fee.title %>: <%= fee.amount %>
+    <%= link_to fee.title, fee_path(fee.friendly_id) %>: <%= fee.amount %>
   </li>
 <% end %>
 </ul>
