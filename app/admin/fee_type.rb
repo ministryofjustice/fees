@@ -6,6 +6,13 @@ ActiveAdmin.register FeeType do
     end
   end
 
+  before_create do |fee|
+    fee.fee_category_id = params["fee_type"]["fee_category_id"]
+  end
+
+  before_update do |fee|
+    fee.fee_category_id = params["fee_type"]["fee_category_id"]
+  end
 
   index do
     column "Fee category" do |category|
@@ -15,6 +22,14 @@ ActiveAdmin.register FeeType do
     column :amount
     actions
   end
+
+  form do |f|
+    f.input :fee_category
+    f.input :title
+    f.input :amount
+    actions
+  end
+
 
   permit_params :title, :amount
 
