@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   get 'categories', to: 'fee_categories#index', as: 'categories'
   get 'categories/:id', to: 'fee_categories#show', as: 'category'
+  root to: 'fee_categories#index'
 end
