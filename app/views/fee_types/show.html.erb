@@ -1,3 +1,9 @@
-<%= @fee.title %>
-<p/>
-<%= @fee.amount %>
+<% content_for :title, "Fee: #{@fee.title}" %>
+
+<div class="row">
+  <%= @fee.title %>
+</div>
+
+<div class="row">
+  <%= @fee.amount %>
+</div>

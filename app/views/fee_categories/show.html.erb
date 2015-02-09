@@ -1,12 +1,17 @@
-<h1>
-  <%= @category.title %>
-</h1>
+<% content_for :title, "Fee Category: #{@category.title}" %>
 
+<div class="row">
+  <h1>
+    <%= @category.title %>
+  </h1>
+</div>
 
-<ul>
-<% @category.fee_types.each do |fee| %>
-  <li>
-    <%= link_to fee.title, fee_path(fee.friendly_id) %>: <%= fee.amount %>
-  </li>
-<% end %>
-</ul>
+<div class="row">
+  <ul>
+  <% @category.fee_types.each do |fee| %>
+    <li>
+      <%= link_to fee.title, fee_path(fee.friendly_id) %>: <%= fee.amount %>
+    </li>
+  <% end %>
+  </ul>
+</div>
