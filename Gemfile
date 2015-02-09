@@ -49,3 +49,4 @@ gem 'friendly_id', '~> 5.1.0'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'foundation-rails'
