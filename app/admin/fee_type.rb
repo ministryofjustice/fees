@@ -15,11 +15,11 @@ ActiveAdmin.register FeeType do
   end
 
   index do
-    column "Fee category" do |category|
-      link_to category.title, admin_fee_category_path(category.id)
-    end
     column :title
     column :amount
+    column "Fee category" do |category|
+      category.title
+    end
     actions
   end
 
