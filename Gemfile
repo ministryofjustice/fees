@@ -52,6 +52,6 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'foundation-rails'
 
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 gem 'seed_dump'

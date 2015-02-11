@@ -14,6 +14,22 @@
 
   <body>
 
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+             <%= link_to "Fees", root_path %></a>
+          </h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><%= link_to "Admin", new_admin_user_session_path %></li>
+        </ul>
+      </section>
+    </nav>
+
     <%= yield %>
 
   </body>
