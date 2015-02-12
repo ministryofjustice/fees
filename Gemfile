@@ -55,3 +55,5 @@ gem 'foundation-rails'
 gem 'rails_12factor', group: :production
 
 gem 'seed_dump'
+
+gem 'textacular', '~> 3.0'
