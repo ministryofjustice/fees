@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   root to: 'fee_categories#index'
 
   get 'search/fees'
+  get 'fee_results/:query', to: 'search#fee_results', as: 'fee_results'
 end
