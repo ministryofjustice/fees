@@ -15,11 +15,15 @@ RSpec.describe SearchController, :type => :controller do
     end
   end
 
-  describe "POST fee_results" do
+  describe "GET fee_results" do
     before(:each) { get :fee_results, query: 'foo'}
 
     it "returns http success" do
       expect(response).to have_http_status(:success)
+    end
+
+    it "returns http success" do
+      expect(response.body).to include 'Search results for: foo'
     end
   end
 
