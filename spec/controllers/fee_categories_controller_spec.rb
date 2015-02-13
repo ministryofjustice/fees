@@ -3,6 +3,13 @@ require 'rails_helper'
 RSpec.describe FeeCategoriesController, :type => :controller do
   render_views
 
+  describe "search link" do
+    it "should show the search link for fees" do
+      get :index, format: :html
+      expect(response.body).to include "Fee search"
+    end
+  end
+
   describe "GET index" do
     it "should render the list of fee categories in HTML" do
       get :index, format: :html
