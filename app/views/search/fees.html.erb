@@ -1,0 +1,14 @@
+<% content_for :title, "Fee search" %>
+
+<div class="row">
+  <div class="large-8 columns">
+    <h1>Fee search</h1>
+
+    <%= form_tag categories_path, method: :get do %>
+    <p>
+      <%= text_field_tag :query, params[:query] %>
+      <%= submit_tag "Search fees", name: nil %>
+    </p>
+    <% end %>
+  </div>
+</div>

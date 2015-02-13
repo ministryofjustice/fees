@@ -1,0 +1,19 @@
+<% content_for :title, "Fee search results" %>
+
+<div class="row">
+  <div class="large-8 columns">
+    <h1>
+      Search results for: <%= @query %>
+    </h1>
+
+    <div class="large-8 columns">
+      <ul>
+        <% @results.each do |fee| %>
+        <li>
+          <%= link_to fee.title, fee_path(id: fee.friendly_id) %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
