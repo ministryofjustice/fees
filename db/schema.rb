@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227100002) do
+ActiveRecord::Schema.define(version: 20150227143917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,10 @@ ActiveRecord::Schema.define(version: 20150227100002) do
 
   create_table "fee_categories", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "slug"
+    t.integer  "statutory_instrument_id", null: false
   end
 
   add_index "fee_categories", ["slug"], name: "index_fee_categories_on_slug", unique: true, using: :btree
