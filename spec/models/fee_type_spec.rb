@@ -25,7 +25,7 @@ RSpec.describe FeeType, :type => :model do
 
   describe 'slug re-generation' do
     let(:fee) do
-      category = FeeCategory.create!(title: 'foo')
+      category = FeeCategory.create!(title: 'foo', statutory_instrument_id: 1)
       fee = FeeType.create!(title: 'foo', amount: 10, fee_category_id: category.id)
       fee.update(title: 'foo bar')
       fee

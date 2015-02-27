@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe FeeCategory, :type => :model do
   context 'validations' do
     context 'with the title' do
-      let(:category) { FeeCategory.new(title: 'some category') }
+      let(:category) do
+        FeeCategory.new(statutory_instrument_id: 1,
+                        title: 'some category')
+      end
 
       it 'should be valid' do
         expect(category).to be_valid
@@ -18,7 +21,7 @@ RSpec.describe FeeCategory, :type => :model do
   end
 
   describe 'slug generation' do
-    before { FeeCategory.create!(title: 'general') }
+    before { FeeCategory.create!(title: 'general', statutory_instrument_id: 1) }
 
     let(:fee) { FeeCategory.where(title: 'general').first }
     let(:friendly_fee) { FeeCategory.friendly.find('general') }
@@ -30,7 +33,7 @@ RSpec.describe FeeCategory, :type => :model do
 
   describe 'slug re-generation' do
     let(:category) do
-      category = FeeCategory.create!(title: 'foo')
+      category = FeeCategory.create!(title: 'foo', statutory_instrument_id: 1)
       category.update(title: 'foo bar')
       category
     end

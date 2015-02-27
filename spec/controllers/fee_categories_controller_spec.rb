@@ -25,7 +25,7 @@ RSpec.describe FeeCategoriesController, :type => :controller do
       before do
         ['General Applications',
          'Money Claims'].each do |category|
-          FeeCategory.create!(title: category)
+          FeeCategory.create!(title: category, statutory_instrument_id: 1)
         end
       end
 
@@ -54,7 +54,8 @@ RSpec.describe FeeCategoriesController, :type => :controller do
   end
 
   describe "GET show" do
-    let(:category) { FeeCategory.create!(title: 'General Applications') }
+    let(:category) { FeeCategory.create!(title: 'General Applications',
+                                         statutory_instrument_id: 1) }
     let!(:fee) do
       FeeType.create!(fee_category_id: category.id,
                       title: 'yes yes',
