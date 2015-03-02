@@ -51,16 +51,26 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
     end
 
     context "HTML" do
-      it "should render a fee category in HTML" do
+      it "should render a statutory instrument in HTML" do
         get :show, id: si.id, format: :html
         expect(response.status).to eq(200)
+      end
+
+      it "should show the statutory instrument" do
+        get :show, id: si.id, format: :html
+        expect(response.body).to include 'The Civil Proceedings Fees (Amendment) Order 2014'
       end
     end
 
     context "JSON" do
-      it "should render a fee category in JSON" do
+      it "should render a statutory instrument in JSON" do
         get :show, id: si.id, format: :json
         expect(response.status).to eq(200)
+      end
+
+      it "should render a statutory instrument in JSON" do
+        get :show, id: si.id, format: :json
+        expect(response.body).to include 'The Civil Proceedings Fees (Amendment) Order 2014'
       end
     end
   end

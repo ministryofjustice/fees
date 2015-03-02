@@ -4,5 +4,6 @@ class StatutoryInstrumentsController < ApplicationController
   end
 
   def show
+    @statutory_instrument = StatutoryInstrument.friendly.find(params[:id])
   end
 end
