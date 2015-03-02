@@ -4,45 +4,42 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
   render_views
 
   describe "GET index" do
-    it "should render the list of fee categories in HTML" do
-      get :index, format: :html
-      expect(response.status).to eq(200)
+    before(:all) do
+      StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) Order 2014',
+                                  description: '',
+                                  coming_into_force: '2014-04-01')
     end
 
-    context "when statutory instrument has already been added" do
-      before do
-        StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) Order 2014',
-                                    description: '',
-                                    coming_into_force: '2014-04-01')
+    context "HTML" do
+      it "should render the list of fee categories in HTML" do
+        get :index, format: :html
+        expect(response.status).to eq(200)
       end
 
-
-      context "HTML" do
-        it "should list fee categories in HTML" do
-          get :index, format: :html
-          expect(response.body).to match /The\ Civil\ Proceedings\ Fees\ \(Amendment\)\ Order\ 2014/
-        end
-      end
-
-      context "JSON" do
-        let(:json) do
-          [{
-             "title" => "The Civil Proceedings Fees (Amendment) Order 2014",
-             "coming_into_force" => "2014-04-01",
-             "link" => "the-civil-proceedings-fees-amendment-order-2014"
-           }].to_json
-        end
-
-        it "should list the statutory instruments in JSON" do
-          get :index, format: :json
-          expect(response.body).to eq json
-        end
+      it "should list fee categories in HTML" do
+        get :index, format: :html
+        expect(response.body).to match /The\ Civil\ Proceedings\ Fees\ \(Amendment\)\ Order\ 2014/
       end
     end
 
-    it "should render the list of fee categories in JSON" do
-      get :index, format: :json
-      expect(response.status).to eq(200)
+    context "JSON" do
+      let(:json) do
+        [{
+           "title" => "The Civil Proceedings Fees (Amendment) Order 2014",
+           "coming_into_force" => "2014-04-01",
+           "link" => "the-civil-proceedings-fees-amendment-order-2014"
+         }].to_json
+      end
+
+      it "should render the list of fee categories in JSON" do
+        get :index, format: :json
+        expect(response.status).to eq(200)
+      end
+
+      it "should list the statutory instruments in JSON" do
+        get :index, format: :json
+        expect(response.body).to eq json
+      end
     end
   end
 
