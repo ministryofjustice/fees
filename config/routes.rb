@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   get 'statutory_instruments', to: 'statutory_instruments#index', as: 'statutory_instruments'
   get 'statutory_instrument', to: 'statutory_instruments#show', as: 'statutory_instrument'
+  root to: 'statutory_instruments#index'
 
   get 'categories', to: 'fee_categories#index', as: 'categories'
   get 'categories/:id', to: 'fee_categories#show', as: 'category'
-  root to: 'fee_categories#index'
 
   get 'search/fees'
   get 'fee_results', to: 'search#fee_results', as: 'fee_results'
