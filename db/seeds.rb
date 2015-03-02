@@ -1,8 +1,12 @@
 # coding: utf-8
+
+si = StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) Order 2014',
+                                 coming_into_force: '2014-04-22')
+
 FeeCategory.create!([
-  {title: "Civil Claims"},
-  {title: "Bankruptcy"},
-  {title: "General Applications"}
+  {title: "Civil Claims", statutory_instrument_id: si.id},
+  {title: "Bankruptcy", statutory_instrument_id: si.id},
+  {title: "General Applications", statutory_instrument_id: si.id},
 ])
 
 FeeType.create!([
