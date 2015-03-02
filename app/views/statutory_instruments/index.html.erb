@@ -10,7 +10,7 @@
   <% @statutory_instruments.each do |si| %>
     <ul>
       <li>
-        <%#= link_to category.title, category_path(category.friendly_id) %>
+        <%= link_to si.title, statutory_instrument_path(si.friendly_id) %>
       </li>
     </ul>
   <% end %>

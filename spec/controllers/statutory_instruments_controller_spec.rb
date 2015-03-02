@@ -9,6 +9,22 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
       expect(response.status).to eq(200)
     end
 
+    context "when statutory instrument has already been added" do
+      before do
+        StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) Order 2014',
+                                    description: '',
+                                    coming_into_force: '2014-04-01')
+      end
+
+
+      context "HTML" do
+        it "should list fee categories in HTML" do
+          get :index, format: :html
+          expect(response.body).to match /The\ Civil\ Proceedings\ Fees\ \(Amendment\)\ Order\ 2014/
+        end
+      end
+    end
+
     it "should render the list of fee categories in JSON" do
       get :index, format: :json
       expect(response.status).to eq(200)
