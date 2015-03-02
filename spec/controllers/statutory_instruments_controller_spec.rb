@@ -23,6 +23,21 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
           expect(response.body).to match /The\ Civil\ Proceedings\ Fees\ \(Amendment\)\ Order\ 2014/
         end
       end
+
+      context "JSON" do
+        let(:json) do
+          [{
+             "title" => "The Civil Proceedings Fees (Amendment) Order 2014",
+             "coming_into_force" => "2014-04-01",
+             "link" => "the-civil-proceedings-fees-amendment-order-2014"
+           }].to_json
+        end
+
+        it "should list the statutory instruments in JSON" do
+          get :index, format: :json
+          expect(response.body).to eq json
+        end
+      end
     end
 
     it "should render the list of fee categories in JSON" do
