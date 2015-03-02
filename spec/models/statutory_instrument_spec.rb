@@ -38,4 +38,18 @@ RSpec.describe StatutoryInstrument, :type => :model do
       end
     end
   end
+
+  describe 'slug re-generation' do
+    let(:si) do
+      si = StatutoryInstrument.new(title: 'foo',
+                                   description: '',
+                                   coming_into_force: '2014-04-01')
+      si.update(title: 'The Civil Proceedings Fees (Amendment) Order 2014')
+      si
+    end
+
+    it 'should change the slug to match the new title' do
+      expect(si.slug).to match 'the-civil-proceedings-fees-(amendment)-order-2014'
+    end
+  end
 end
