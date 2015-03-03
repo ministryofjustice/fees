@@ -28,7 +28,10 @@ RSpec.describe SearchController, :type => :controller do
 
     context "display results" do
       before(:all) do
-        category = FeeCategory.create!(title: 'Cool', statutory_instrument_id: 1)
+        category = FeeCategory.create!(title: 'Cool',
+                                       statutory_instrument_id: 1,
+                                       description: 'description',
+                                       fee_number: '1')
         ['super', 'mildly', 'amazingly'].each do |fee|
           fee_type = category.fee_types.build
           fee_type.title = "#{fee} cool fee"

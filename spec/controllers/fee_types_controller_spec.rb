@@ -4,8 +4,13 @@ RSpec.describe FeeTypesController, :type => :controller do
   render_views
 
   describe "GET show" do
-    let(:category) { FeeCategory.create!(title: 'General Applications',
-                                         statutory_instrument_id: 1) }
+    let(:category) do
+      FeeCategory.create!(title: 'General Applications',
+                          statutory_instrument_id: 1,
+                          description: 'description',
+                          fee_number: '1')
+    end
+
     let!(:fee) do
       FeeType.create!(fee_category_id: category.id,
                       title: 'yes yes',

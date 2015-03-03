@@ -5,7 +5,9 @@ RSpec.describe FeeCategory, :type => :model do
     context 'with the title' do
       let(:category) do
         FeeCategory.new(statutory_instrument_id: 1,
-                        title: 'some category')
+                        title: 'some category',
+                        description: 'description',
+                        fee_number: '1')
       end
 
       it 'should be valid' do
@@ -18,10 +20,43 @@ RSpec.describe FeeCategory, :type => :model do
         expect(FeeCategory.new).to_not be_valid
       end
     end
+
+    context 'description' do
+      context 'without the description' do
+        let(:category) do
+          FeeCategory.new(statutory_instrument_id: 1,
+                          title: 'some category',
+                          fee_number: '1')
+        end
+
+        it 'should not be valid' do
+          expect(category).to_not be_valid
+        end
+      end
+    end
+
+    context 'fee_number' do
+      context 'without the fee_number' do
+        let(:category) do
+          FeeCategory.new(statutory_instrument_id: 1,
+                          title: 'some category',
+                          description: 'description')
+        end
+
+        it 'should not be valid' do
+          expect(category).to_not be_valid
+        end
+      end
+    end
   end
 
   describe 'slug generation' do
-    before { FeeCategory.create!(title: 'general', statutory_instrument_id: 1) }
+    before do
+      FeeCategory.create!(title: 'general',
+                          statutory_instrument_id: 1,
+                          description: 'description',
+                          fee_number: '1')
+    end
 
     let(:fee) { FeeCategory.where(title: 'general').first }
     let(:friendly_fee) { FeeCategory.friendly.find('general') }
@@ -33,7 +68,10 @@ RSpec.describe FeeCategory, :type => :model do
 
   describe 'slug re-generation' do
     let(:category) do
-      category = FeeCategory.create!(title: 'foo', statutory_instrument_id: 1)
+      category = FeeCategory.create!(title: 'foo',
+                                     statutory_instrument_id: 1,
+                                     description: 'description',
+                                     fee_number: '1')
       category.update(title: 'foo bar')
       category
     end
