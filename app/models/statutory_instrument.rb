@@ -1,5 +1,6 @@
 class StatutoryInstrument < ActiveRecord::Base
   validates :title, :coming_into_force, presence: true
+  has_many :fee_categories
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
