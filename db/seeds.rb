@@ -1,5 +1,9 @@
 # coding: utf-8
 
+AdminUser.create!(email: 'admin@example.com',
+                  password: 'password',
+                  password_confirmation: 'password')
+
 si = StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) Order 2014',
                                  coming_into_force: '2014-04-22')
 
