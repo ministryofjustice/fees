@@ -7,7 +7,8 @@ RSpec.describe FeeTypesController, :type => :controller do
     let(:category) do
       FeeCategory.create!(title: 'General Applications',
                           statutory_instrument_id: 1,
-                          description: 'description')
+                          description: 'description',
+                          fee_number: '1')
     end
 
     let!(:fee) do

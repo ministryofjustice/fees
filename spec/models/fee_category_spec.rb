@@ -6,7 +6,8 @@ RSpec.describe FeeCategory, :type => :model do
       let(:category) do
         FeeCategory.new(statutory_instrument_id: 1,
                         title: 'some category',
-                        description: 'description')
+                        description: 'description',
+                        fee_number: '1')
       end
 
       it 'should be valid' do
@@ -24,7 +25,22 @@ RSpec.describe FeeCategory, :type => :model do
       context 'without the description' do
         let(:category) do
           FeeCategory.new(statutory_instrument_id: 1,
-                          title: 'some category')
+                          title: 'some category',
+                          fee_number: '1')
+        end
+
+        it 'should not be valid' do
+          expect(category).to_not be_valid
+        end
+      end
+    end
+
+    context 'fee_number' do
+      context 'without the fee_number' do
+        let(:category) do
+          FeeCategory.new(statutory_instrument_id: 1,
+                          title: 'some category',
+                          description: 'description')
         end
 
         it 'should not be valid' do
@@ -38,7 +54,8 @@ RSpec.describe FeeCategory, :type => :model do
     before do
       FeeCategory.create!(title: 'general',
                           statutory_instrument_id: 1,
-                          description: 'description')
+                          description: 'description',
+                          fee_number: '1')
     end
 
     let(:fee) { FeeCategory.where(title: 'general').first }
@@ -53,7 +70,8 @@ RSpec.describe FeeCategory, :type => :model do
     let(:category) do
       category = FeeCategory.create!(title: 'foo',
                                      statutory_instrument_id: 1,
-                                     description: 'description')
+                                     description: 'description',
+                                     fee_number: '1')
       category.update(title: 'foo bar')
       category
     end

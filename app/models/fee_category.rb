@@ -1,5 +1,5 @@
 class FeeCategory < ActiveRecord::Base
-  validates :title, :description, presence: true
+  validates :title, :description, :fee_number, presence: true
   has_many :fee_types
 
   extend FriendlyId

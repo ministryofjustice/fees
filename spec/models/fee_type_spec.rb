@@ -27,7 +27,8 @@ RSpec.describe FeeType, :type => :model do
     let(:fee) do
       category = FeeCategory.create!(title: 'foo',
                                      statutory_instrument_id: 1,
-                                     description: 'description')
+                                     description: 'description',
+                                     fee_number: '1')
       fee = FeeType.create!(title: 'foo', amount: 10, fee_category_id: category.id)
       fee.update(title: 'foo bar')
       fee
