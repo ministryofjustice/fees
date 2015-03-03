@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get 'statutory_instruments', to: 'statutory_instruments#index', as: 'statutory_instruments'
-  get 'statutory_instrument', to: 'statutory_instruments#show', as: 'statutory_instrument'
+  get 'statutory_instrument/:id', to: 'statutory_instruments#show', as: 'statutory_instrument'
   root to: 'statutory_instruments#index'
 
   get 'categories', to: 'fee_categories#index', as: 'categories'
