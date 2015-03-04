@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe FeeType, :type => :model do
   context 'validations' do
-    context 'with the title and amount' do
-      let(:fee) { FeeType.new(title: 'some fee', amount: 100) }
+    context 'with all the attributes' do
+      let(:fee) do
+        FeeType.new(title: 'some fee',
+                    amount: 100,
+                    fee_number: 'a')
+      end
 
       it 'should be valid' do
         expect(fee).to be_valid
@@ -11,6 +15,12 @@ RSpec.describe FeeType, :type => :model do
     end
 
     context 'without the title' do
+      it 'should not be valid' do
+        expect(FeeType.new).to_not be_valid
+      end
+    end
+
+    context 'without the fee_number' do
       it 'should not be valid' do
         expect(FeeType.new).to_not be_valid
       end
@@ -29,7 +39,10 @@ RSpec.describe FeeType, :type => :model do
                                      statutory_instrument_id: 1,
                                      description: 'description',
                                      fee_number: '1')
-      fee = FeeType.create!(title: 'foo', amount: 10, fee_category_id: category.id)
+      fee = FeeType.create!(title: 'foo',
+                            amount: 10,
+                            fee_category_id: category.id,
+                            fee_number: 'a')
       fee.update(title: 'foo bar')
       fee
     end

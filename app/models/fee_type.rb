@@ -1,7 +1,7 @@
 class FeeType < ActiveRecord::Base
   belongs_to :fee_category
 
-  validates :title, :amount, presence: true
+  validates :title, :amount, :fee_number, presence: true
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
