@@ -60,6 +60,20 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
         get :show, id: si.id, format: :html
         expect(response.body).to include 'The Civil Proceedings Fees (Amendment) Order 2014'
       end
+
+      context 'when there are Fee Categories present' do
+        let(:category) do
+          FeeCategory.create!(title: 'Starting proceedings (High Court and Court)',
+                              statutory_instrument_id: si.id,
+                              description: 'description',
+                              fee_number: '1.1')
+        end
+
+        it 'should show the Fee Categories' do
+          get :show, id: si.id, format: :html
+          expect(response.body).to include category.title
+        end
+      end
     end
 
     context "JSON" do
