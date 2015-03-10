@@ -8,7 +8,7 @@ si = StatutoryInstrument.create!(title: 'The Civil Proceedings Fees (Amendment) 
 
 FeeCategory.create!([{ title: "Starting proceedings (High Court and County Court)",
                        statutory_instrument_id: si.id,
-                       description: 'description',
+                       description: 'Money Claims: Issue Fee',
                        fee_number: '1.1' }])
 
 list_of_fees = [["a", "does not exceed £300", "35"],
