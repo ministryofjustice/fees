@@ -62,7 +62,7 @@ RSpec.describe StatutoryInstrumentsController, :type => :controller do
       end
 
       context 'when there are Fee Categories present' do
-        let(:category) do
+        let!(:category) do
           FeeCategory.create!(title: 'Starting proceedings (High Court and Court)',
                               statutory_instrument_id: si.id,
                               description: 'description',
