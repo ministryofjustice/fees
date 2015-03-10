@@ -4,14 +4,16 @@
   <h1>
     <%= @category.title %>
   </h1>
+  <p>
+    <%= @category.description %>
+  </p>
 </div>
 
 <div class="row">
-  <ul>
-  <% @category.fee_types.each do |fee| %>
-    <li>
-      <%= link_to fee.title, fee_path(fee.friendly_id) %>: £<%= fee.amount %>
-    </li>
+  <%= form_tag sum_path(@category.friendly_id), method: :post do %>
+  <p>
+    Enter the sum claimed: <%= text_field_tag :amount, params[:amount] %>
+    <%= submit_tag "Search fees", name: nil %>
+  </p>
   <% end %>
-  </ul>
 </div>
