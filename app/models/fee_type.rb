@@ -1,6 +1,7 @@
 class FeeType < ActiveRecord::Base
   belongs_to :fee_category
   has_many :banded_fees
+  has_one :flat_fee
 
   validates :title, :amount, :fee_number, presence: true
 
