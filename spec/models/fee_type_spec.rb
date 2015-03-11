@@ -51,4 +51,42 @@ RSpec.describe FeeType, :type => :model do
       expect(fee.slug).to match 'foo-bar'
     end
   end
+
+  describe '.get_band' do
+    let(:category) do
+      FeeCategory.create!(title: 'foo',
+                          statutory_instrument_id: 1,
+                          description: 'description',
+                          fee_number: '1')
+    end
+
+    let!(:fee) do
+      FeeType.create!(title: 'foo',
+                      amount: 10,
+                      fee_category_id: category.id,
+                      fee_number: 'a')
+    end
+
+    before do
+      bands = [['a', '0', '300', '35'],
+               ['b', '300', '500', '50'],
+               ['c', '500', '1000', '70'],
+               ['d', '1000', '1500', '80'],
+               ['e', '1500', '3000', '115'],
+               ['f', '3000', '5000', '205']]
+
+      bands.each do |band|
+        BandedFee.create!(fee_type_id: fee.id,
+                          fee_number: band[0],
+                          from_amount: band[1],
+                          to_amount: band[2],
+                          amount: band[3])
+      end
+      fee.reload
+    end
+
+    it 'should return the fee band based on the amount given' do
+      expect(fee.get_band('200').amount).to match '35'
+    end
+  end
 end

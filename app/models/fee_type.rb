@@ -10,4 +10,10 @@ class FeeType < ActiveRecord::Base
   def should_generate_new_friendly_id?
     title_changed?
   end
+
+  def get_band amount
+    self.banded_fees.each do |band|
+      return band if band.to_amount.to_i > amount.to_i
+    end
+  end
 end
