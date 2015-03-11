@@ -13,6 +13,7 @@ class FeeType < ActiveRecord::Base
 
   def get_band amount
     self.banded_fees.each do |band|
+      return band if band.to_amount == 'unlimited'
       return band if band.to_amount.to_i > amount.to_i
     end
   end

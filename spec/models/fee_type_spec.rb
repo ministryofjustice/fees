@@ -73,7 +73,15 @@ RSpec.describe FeeType, :type => :model do
                ['c', '500', '1000', '70'],
                ['d', '1000', '1500', '80'],
                ['e', '1500', '3000', '115'],
-               ['f', '3000', '5000', '205']]
+               ['f', '3000', '5000', '205'],
+               ['g', '5000', '15000', '455'],
+               ['h', '15000', '50000', '610'],
+               ['i', '50000', '100000', '910'],
+               ['j', '100000', '150000', '1115'],
+               ['k', '150000', '200000', '1350'],
+               ['l', '200000', '250000', '1515'],
+               ['m', '250000', '300000', '1720'],
+               ['n', '300000', 'unlimited', '1920']]
 
       bands.each do |band|
         BandedFee.create!(fee_type_id: fee.id,
@@ -87,6 +95,10 @@ RSpec.describe FeeType, :type => :model do
 
     it 'should return the fee band based on the amount given' do
       expect(fee.get_band('200').amount).to match '35'
+    end
+
+    it 'should handle the "unlimited" upper fee limit correctly' do
+      expect(fee.get_band('300001').amount).to match '1920'
     end
   end
 end
