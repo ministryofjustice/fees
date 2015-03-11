@@ -100,5 +100,13 @@ RSpec.describe FeeType, :type => :model do
     it 'should handle the "unlimited" upper fee limit correctly' do
       expect(fee.get_band('300001').amount).to match '1920'
     end
+
+    it 'should handle correctly the amounts that match the upper limit of a band' do
+      expect(fee.get_band('3000').amount).to match '115'
+    end
+
+    it 'should handle the decimal amounts correctly' do
+      expect(fee.get_band('3000.27').amount).to match '205'
+    end
   end
 end
