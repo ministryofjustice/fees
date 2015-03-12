@@ -2,28 +2,34 @@ require 'rails_helper'
 
 RSpec.describe FeeType, :type => :model do
   context 'validations' do
-    context 'with all the attributes' do
-      let(:fee) do
-        FeeType.new(title: 'some fee',
-                    amount: 100,
-                    fee_number: 'a')
-      end
-
-      it 'should be valid' do
-        expect(fee).to be_valid
-      end
+    let(:fee) do
+      FeeType.new(title: 'some fee',
+                  amount: 100,
+                  fee_number: 'a',
+                  description: 'description')
     end
 
-    context 'without the title' do
-      it 'should not be valid' do
-        expect(FeeType.new).to_not be_valid
-      end
+    subject { fee.valid? }
+
+    it { is_expected.to be true }
+
+
+    describe 'without the title' do
+      before { fee.title = '' }
+
+      it { is_expected.to_not be true }
     end
 
-    context 'without the fee_number' do
-      it 'should not be valid' do
-        expect(FeeType.new).to_not be_valid
-      end
+    describe 'without the fee_number' do
+      before { fee.fee_number = '' }
+
+      it { is_expected.to_not be true }
+    end
+
+    describe 'without the description' do
+      before { fee.description = '' }
+
+      it { is_expected.to_not be true }
     end
   end
 
@@ -42,7 +48,8 @@ RSpec.describe FeeType, :type => :model do
       fee = FeeType.create!(title: 'foo',
                             amount: 10,
                             fee_category_id: category.id,
-                            fee_number: 'a')
+                            fee_number: 'a',
+                            description: 'description')
       fee.update(title: 'foo bar')
       fee
     end
@@ -64,7 +71,8 @@ RSpec.describe FeeType, :type => :model do
       FeeType.create!(title: 'foo',
                       amount: 10,
                       fee_category_id: category.id,
-                      fee_number: 'a')
+                      fee_number: 'a',
+                      description: 'description')
     end
 
     before do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311113353) do
+ActiveRecord::Schema.define(version: 20150312092611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150311113353) do
   create_table "fee_types", force: :cascade do |t|
     t.integer  "fee_category_id", null: false
     t.string   "title"
+    t.string   "description"
     t.integer  "amount"
     t.string   "fee_number"
     t.string   "slug"

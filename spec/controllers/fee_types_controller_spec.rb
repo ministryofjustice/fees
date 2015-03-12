@@ -14,7 +14,8 @@ RSpec.describe FeeTypesController, :type => :controller do
     FeeType.create!(fee_category_id: category.id,
                     title: 'yes yes',
                     amount: 35,
-                    fee_number: 'a')
+                    fee_number: 'a',
+                    description: 'description')
   end
 
 
