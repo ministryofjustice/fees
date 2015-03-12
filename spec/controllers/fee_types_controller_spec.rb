@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 
 RSpec.describe FeeTypesController, :type => :controller do
@@ -26,9 +27,59 @@ RSpec.describe FeeTypesController, :type => :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it "shows the fee" do
-        get :show, id: fee.friendly_id, format: :html
-        expect(response.body).to match 'yes yes'
+      context 'when it has a flat fee' do
+        let!(:flat_fee) do
+          BandedFee.where(fee_type_id: fee.id).delete_all
+          FlatFee.create!(fee_type_id: fee.id,
+                          fee_number: '1.4 a',
+                          amount: '35')
+        end
+
+        before do
+          fee.banded_fees.delete unless fee.banded_fees.blank?
+          get :show, id: fee.friendly_id, format: :html
+        end
+
+        it 'should have a flat fee' do
+          expect(fee.flat_fee.blank?).to be false
+          expect(fee.banded_fees.blank?).to be true
+        end
+
+        it 'shows the fee' do
+          expect(response.body).to match '£35'
+        end
+
+        it "doesn't show the form for calculating the fee" do
+          expect(response.body).not_to include 'Enter the sum claimed:'
+        end
+      end
+
+      context 'when it has a banded fee' do
+        let!(:banded_fee) do
+          FlatFee.where(fee_type_id: fee.id).delete_all
+          BandedFee.create!(fee_type_id: fee.id,
+                            fee_number: '1.1',
+                            from_amount: '0',
+                            to_amount: '300',
+                            amount: '35')
+        end
+
+        before do
+          get :show, id: fee.friendly_id, format: :html
+        end
+
+        it 'should have a banded fee' do
+          expect(fee.banded_fees.blank?).to be false
+          expect(fee.flat_fee.blank?).to be true
+        end
+
+        it 'shows the form for calculating the fee' do
+          expect(response.body).to match 'Enter the sum claimed:'
+        end
+
+        it "doesn't show the fee amount" do
+          expect(response.body).not_to match '£35'
+        end
       end
     end
 

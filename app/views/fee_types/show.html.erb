@@ -9,7 +9,18 @@
   <%= @fee.title %>
 </div>
 
-<div class="row">
-  <strong>Amount:</strong>
-  £<%= @fee.amount %>
-</div>
+<% if @fee.banded_fees.blank? %>
+  <div class="row">
+    <strong>Amount:</strong>
+    £<%= @fee.amount %>
+  </div>
+<% else %>
+  <div class="row">
+    <%= form_tag '/', method: :post do %>
+    <p>
+      Enter the sum claimed: <%= text_field_tag :amount, params[:amount] %>
+      <%= submit_tag "Search fees", name: nil %>
+    </p>
+    <% end %>
+  </div>
+<% end %>

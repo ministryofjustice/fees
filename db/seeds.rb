@@ -51,6 +51,7 @@ land_recovery = FeeCategory.create!(title: "On starting proceedings for the reco
 land_recovery_fee = FeeType.create!(fee_category_id: land_recovery.id,
                                     fee_number: '1.4',
                                     title: 'in the High Court',
+                                    description: 'another fee',
                                     amount: '480')
 
 FlatFee.create!(fee_type_id: land_recovery_fee.id,
