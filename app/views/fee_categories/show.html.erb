@@ -10,6 +10,20 @@
 </div>
 
 <div class="row">
+  <h2>
+    Fees
+  </h2>
+
+  <ul>
+    <% @category.fee_types.each do |fee| %>
+    <li>
+      <%= link_to fee.title, fee_path(fee.friendly_id) %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="row">
   <%= form_tag sum_path(@category.friendly_id), method: :post do %>
   <p>
     Enter the sum claimed: <%= text_field_tag :amount, params[:amount] %>

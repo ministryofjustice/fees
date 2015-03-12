@@ -85,7 +85,7 @@ RSpec.describe FeeCategoriesController, :type => :controller do
 
       it "should show the fee types under the category" do
         get :show, id: category.friendly_id, format: :html
-        expect(response.body).to match 'Enter the sum claimed:'
+        expect(response.body).to match 'yes yes'
       end
     end
 
