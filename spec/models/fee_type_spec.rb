@@ -4,7 +4,6 @@ RSpec.describe FeeType, :type => :model do
   context 'validations' do
     let(:fee) do
       FeeType.new(title: 'some fee',
-                  amount: 100,
                   fee_number: 'a',
                   description: 'description')
     end
@@ -46,7 +45,6 @@ RSpec.describe FeeType, :type => :model do
                                      description: 'description',
                                      fee_number: '1')
       fee = FeeType.create!(title: 'foo',
-                            amount: 10,
                             fee_category_id: category.id,
                             fee_number: 'a',
                             description: 'description')
@@ -69,7 +67,6 @@ RSpec.describe FeeType, :type => :model do
 
     let!(:fee) do
       FeeType.create!(title: 'foo',
-                      amount: 10,
                       fee_category_id: category.id,
                       fee_number: 'a',
                       description: 'description')

@@ -35,7 +35,6 @@ RSpec.describe SearchController, :type => :controller do
         ['super', 'mildly', 'amazingly'].each do |fee|
           fee_type = category.fee_types.build(fee_number: 'a',
                                               title: "#{fee} cool fee",
-                                              amount: 10,
                                               description: 'description')
           fee_type.save
         end

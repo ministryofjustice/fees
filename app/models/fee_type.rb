@@ -3,7 +3,7 @@ class FeeType < ActiveRecord::Base
   has_many :banded_fees
   has_one :flat_fee
 
-  validates :title, :amount, :fee_number, :description, presence: true
+  validates :title, :fee_number, :description, presence: true
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]

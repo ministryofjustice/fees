@@ -15,8 +15,7 @@ category = FeeCategory.create!(title: "Starting proceedings (High Court and Coun
 fee = FeeType.create!(fee_category_id: category.id,
                 fee_number: '1.1',
                 title: 'On starting proceedings to recover a sum of money where the sum claimed',
-                description: 'Money Claims: Issue Fee',
-                amount: 'blah')
+                description: 'Money Claims: Issue Fee')
 
 bands = [['a', '0', '300', '35'],
          ['b', '300', '500', '50'],
@@ -51,8 +50,7 @@ land_recovery = FeeCategory.create!(title: "On starting proceedings for the reco
 land_recovery_fee = FeeType.create!(fee_category_id: land_recovery.id,
                                     fee_number: '1.4',
                                     title: 'in the High Court',
-                                    description: 'another fee',
-                                    amount: '480')
+                                    description: 'another fee')
 
 FlatFee.create!(fee_type_id: land_recovery_fee.id,
                 fee_number: 'a',
