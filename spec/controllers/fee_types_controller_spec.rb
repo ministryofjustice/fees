@@ -19,14 +19,8 @@ RSpec.describe FeeTypesController, :type => :controller do
                     description: 'description')
   end
 
-
   describe "GET show" do
     context "HTML" do
-      it "returns http success" do
-        get :show, id: fee.friendly_id, format: :html
-        expect(response).to have_http_status(:success)
-      end
-
       context 'when it has a flat fee' do
         let!(:flat_fee) do
           BandedFee.where(fee_type_id: fee.id).delete_all
@@ -38,6 +32,10 @@ RSpec.describe FeeTypesController, :type => :controller do
         before do
           fee.banded_fees.delete unless fee.banded_fees.blank?
           get :show, id: fee.friendly_id, format: :html
+        end
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:success)
         end
 
         it 'should have a flat fee' do
@@ -66,6 +64,10 @@ RSpec.describe FeeTypesController, :type => :controller do
 
         before do
           get :show, id: fee.friendly_id, format: :html
+        end
+
+        it 'returns http success' do
+          expect(response).to have_http_status(:success)
         end
 
         it 'should have a banded fee' do
@@ -104,7 +106,15 @@ RSpec.describe FeeTypesController, :type => :controller do
   end
 
   describe 'GET amount' do
-    before(:each) { get :show, id: fee.friendly_id, amount: '100' }
+    before(:each) do
+      BandedFee.create!(fee_type_id: fee.id,
+                        fee_number: '1.1',
+                        from_amount: '0',
+                        to_amount: '300',
+                        amount: '35')
+      get :amount, id: fee.friendly_id, amount: '100'
+    end
+
 
     it 'should return successful status code' do
       expect(response.status).to eq 200
@@ -114,5 +124,4 @@ RSpec.describe FeeTypesController, :type => :controller do
       expect(response.body).to match '35'
     end
   end
-
 end

@@ -8,5 +8,7 @@ class FeeTypesController < ApplicationController
   end
 
   def amount
+    @fee = FeeType.friendly.find(params[:id])
+    @amount = @fee.get_band(params[:amount])
   end
 end

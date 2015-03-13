@@ -12,11 +12,11 @@
 <% if @fee.banded_fees.blank? %>
   <div class="row">
     <strong>Amount:</strong>
-    £<%= @fee.amount %>
+    £<%= @fee.flat_fee.amount %>
   </div>
 <% else %>
   <div class="row">
-    <%= form_tag '/', method: :post do %>
+    <%= form_tag sum_path(@fee.friendly_id), method: :post do %>
     <p>
       Enter the sum claimed: <%= text_field_tag :amount, params[:amount] %>
       <%= submit_tag "Search fees", name: nil %>

@@ -22,12 +22,3 @@
     <% end %>
   </ul>
 </div>
-
-<div class="row">
-  <%= form_tag sum_path(@category.friendly_id), method: :post do %>
-  <p>
-    Enter the sum claimed: <%= text_field_tag :amount, params[:amount] %>
-    <%= submit_tag "Search fees", name: nil %>
-  </p>
-  <% end %>
-</div>
