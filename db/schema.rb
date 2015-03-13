@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313143417) do
+ActiveRecord::Schema.define(version: 20150313172621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150313143417) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "banded_fees", force: :cascade do |t|
-    t.integer  "fee_type_id", null: false
+    t.integer  "fee_id",      null: false
     t.string   "fee_number",  null: false
     t.string   "from_amount", null: false
     t.string   "to_amount",   null: false
@@ -71,25 +71,25 @@ ActiveRecord::Schema.define(version: 20150313143417) do
 
   add_index "fee_categories", ["slug"], name: "index_fee_categories_on_slug", unique: true, using: :btree
 
-  create_table "fee_types", force: :cascade do |t|
+  create_table "fees", force: :cascade do |t|
     t.integer  "fee_category_id", null: false
     t.string   "title"
-    t.string   "description"
-    t.string   "fee_number"
-    t.string   "slug"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "slug"
+    t.string   "fee_number"
+    t.string   "description"
   end
 
-  add_index "fee_types", ["fee_category_id"], name: "index_fee_types_on_fee_category_id", using: :btree
-  add_index "fee_types", ["slug"], name: "index_fee_types_on_slug", unique: true, using: :btree
+  add_index "fees", ["fee_category_id"], name: "index_fees_on_fee_category_id", using: :btree
+  add_index "fees", ["slug"], name: "index_fees_on_slug", unique: true, using: :btree
 
   create_table "flat_fees", force: :cascade do |t|
-    t.integer  "fee_type_id", null: false
-    t.string   "fee_number",  null: false
-    t.string   "amount",      null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "fee_id",     null: false
+    t.string   "fee_number", null: false
+    t.string   "amount",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20150313143417) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "banded_fees", "fee_types"
-  add_foreign_key "banded_fees", "fee_types"
-  add_foreign_key "fee_types", "fee_categories"
+  add_foreign_key "banded_fees", "fees"
+  add_foreign_key "banded_fees", "fees"
+  add_foreign_key "fees", "fee_categories"
 end

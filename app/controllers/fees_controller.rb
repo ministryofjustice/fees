@@ -1,6 +1,6 @@
-class FeeTypesController < ApplicationController
+class FeesController < ApplicationController
   def show
-    @fee = FeeType.friendly.find(params[:id])
+    @fee = Fee.friendly.find(params[:id])
   end
 
   def sum
@@ -8,7 +8,7 @@ class FeeTypesController < ApplicationController
   end
 
   def amount
-    @fee = FeeType.friendly.find(params[:id])
+    @fee = Fee.friendly.find(params[:id])
     @amount = @fee.get_band(params[:amount])
   end
 end

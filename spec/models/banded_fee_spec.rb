@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe BandedFee, type: :model do
   context 'validations' do
     let!(:fee) do
-      BandedFee.new(fee_type_id: 1,
+      BandedFee.new(fee_id: 1,
                     fee_number: '1.1',
                     from_amount: '0',
                     to_amount: '300',

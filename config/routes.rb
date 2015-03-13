@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'fee/:id', to: 'fee_types#show', as: 'fee'
-  post 'fee/:id', to: 'fee_types#sum', as: 'sum'
-  get 'fee/:id/:amount', to: 'fee_types#amount', as: 'fee_payable'
+  get 'fee/:id', to: 'fees#show', as: 'fee'
+  post 'fee/:id', to: 'fees#sum', as: 'sum'
+  get 'fee/:id/:amount', to: 'fees#amount', as: 'fee_payable'
 
   devise_for :users, ActiveAdmin::Devise.config
   devise_for :admin_users, ActiveAdmin::Devise.config

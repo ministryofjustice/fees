@@ -1,4 +1,4 @@
-ActiveAdmin.register FeeType do
+ActiveAdmin.register Fee do
 
   controller do
     def find_resource
@@ -7,11 +7,11 @@ ActiveAdmin.register FeeType do
   end
 
   before_create do |fee|
-    fee.fee_category_id = params["fee_type"]["fee_category_id"]
+    fee.fee_category_id = params["fee"]["fee_category_id"]
   end
 
   before_update do |fee|
-    fee.fee_category_id = params["fee_type"]["fee_category_id"]
+    fee.fee_category_id = params["fee"]["fee_category_id"]
   end
 
   index do

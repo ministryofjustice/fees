@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FlatFee, type: :model do
   context 'validations' do
     let!(:fee) do
-      FlatFee.new(fee_type_id: 1,
+      FlatFee.new(fee_id: 1,
                   fee_number: '1.1',
                   amount: '35')
     end

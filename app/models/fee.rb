@@ -1,4 +1,4 @@
-class FeeType < ActiveRecord::Base
+class Fee < ActiveRecord::Base
   belongs_to :fee_category
   has_many :banded_fees
   has_one :flat_fee

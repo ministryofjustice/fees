@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe FeeType, :type => :model do
+RSpec.describe Fee, type: :model do
   context 'validations' do
     let(:fee) do
-      FeeType.new(title: 'some fee',
-                  fee_number: 'a',
-                  description: 'description')
+      Fee.new(title: 'some fee',
+              fee_number: 'a',
+              description: 'description')
     end
 
     subject { fee.valid? }
@@ -34,7 +34,7 @@ RSpec.describe FeeType, :type => :model do
 
   context "create nested fees under FeeCategory" do
     it 'should work' do
-      expect(FeeType.reflect_on_association(:fee_category).macro).to eq(:belongs_to)
+      expect(Fee.reflect_on_association(:fee_category).macro).to eq(:belongs_to)
     end
   end
 
@@ -44,10 +44,10 @@ RSpec.describe FeeType, :type => :model do
                                      statutory_instrument_id: 1,
                                      description: 'description',
                                      fee_number: '1')
-      fee = FeeType.create!(title: 'foo',
-                            fee_category_id: category.id,
-                            fee_number: 'a',
-                            description: 'description')
+      fee = Fee.create!(title: 'foo',
+                        fee_category_id: category.id,
+                        fee_number: 'a',
+                        description: 'description')
       fee.update(title: 'foo bar')
       fee
     end
@@ -66,10 +66,10 @@ RSpec.describe FeeType, :type => :model do
     end
 
     let!(:fee) do
-      FeeType.create!(title: 'foo',
-                      fee_category_id: category.id,
-                      fee_number: 'a',
-                      description: 'description')
+      Fee.create!(title: 'foo',
+                  fee_category_id: category.id,
+                  fee_number: 'a',
+                  description: 'description')
     end
 
     before do
@@ -89,7 +89,7 @@ RSpec.describe FeeType, :type => :model do
                ['n', '300000', 'unlimited', '1920']]
 
       bands.each do |band|
-        BandedFee.create!(fee_type_id: fee.id,
+        BandedFee.create!(fee_id: fee.id,
                           fee_number: band[0],
                           from_amount: band[1],
                           to_amount: band[2],

@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails_helper'
 
-RSpec.describe FeeTypesController, :type => :controller do
+RSpec.describe FeesController, type: :controller do
   render_views
 
   let(:category) do
@@ -12,18 +12,18 @@ RSpec.describe FeeTypesController, :type => :controller do
   end
 
   let!(:fee) do
-    FeeType.create!(fee_category_id: category.id,
-                    title: 'yes yes',
-                    fee_number: 'a',
-                    description: 'description')
+    Fee.create!(fee_category_id: category.id,
+                title: 'yes yes',
+                fee_number: 'a',
+                description: 'description')
   end
 
   describe "GET show" do
     context "HTML" do
       context 'when it has a flat fee' do
         let!(:flat_fee) do
-          BandedFee.where(fee_type_id: fee.id).delete_all
-          FlatFee.create!(fee_type_id: fee.id,
+          BandedFee.where(fee_id: fee.id).delete_all
+          FlatFee.create!(fee_id: fee.id,
                           fee_number: '1.4 a',
                           amount: '35')
         end
@@ -53,8 +53,8 @@ RSpec.describe FeeTypesController, :type => :controller do
 
       context 'when it has a banded fee' do
         let!(:banded_fee) do
-          FlatFee.where(fee_type_id: fee.id).delete_all
-          BandedFee.create!(fee_type_id: fee.id,
+          FlatFee.where(fee_id: fee.id).delete_all
+          BandedFee.create!(fee_id: fee.id,
                             fee_number: '1.1',
                             from_amount: '0',
                             to_amount: '300',
@@ -106,7 +106,7 @@ RSpec.describe FeeTypesController, :type => :controller do
 
   describe 'GET amount' do
     before(:each) do
-      BandedFee.create!(fee_type_id: fee.id,
+      BandedFee.create!(fee_id: fee.id,
                         fee_number: '1.1',
                         from_amount: '0',
                         to_amount: '300',

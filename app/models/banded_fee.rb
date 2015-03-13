@@ -1,5 +1,5 @@
 class BandedFee < ActiveRecord::Base
-  belongs_to :fee_type
+  belongs_to :fee
 
   validates :fee_number,
             :from_amount,

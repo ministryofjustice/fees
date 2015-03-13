@@ -4,6 +4,6 @@ class SearchController < ApplicationController
 
   def fee_results
     @query = params[:query]
-    @results = FeeType.basic_search(title: @query)
+    @results = Fee.basic_search(title: @query)
   end
 end
